@@ -6,7 +6,7 @@ How much can we learn from healthcare reviews written by patients? Patients are 
 
 Can we use text alone to predict review usefulness? It often takes time for a good review to gather many votes that it deserves. But if useful reviews tend to use similar words or styles, we should be able to predict how many useful votes a review will eventually obtain as soon as it is written. Such model will help people to quickly find the most useful reviews and hopefully better care.
 
-### Text Preprocessing
+### [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20Text_Preprocessing.ipynb)
 
 [Yelp dataset](https://www.yelp.com/dataset_challenge) contains more than 4 million reviews written by 1 million users for 144 thousand businesses. The data are provided in .json format as separate files for businesses and reviews. The files are text files (UTF-8) with one json object corresponding to an individual record in each line.
 
@@ -24,7 +24,7 @@ The main idea of word2vec is that we can learn something about the meaning of a 
 
 For the healthcare reviews, I first build the vocabulary from going through the entire corpus and then train a word2vec model with 10 epochs. There are a total of 6,382 terms in the word2vec vocabulary. Each term is represented by a 100-deminsiontal vector. 
 
-### Predicting Review Usefulness with Word2Vec Features
+### [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
 
 With a dictionary mapping each word to a 100-dimensional semantic vector, we can build features for each document. The simplest way is to average word vectors for all word in a review. Another version is to weight each word by the its TF-IDF. Some have also suggested using the maximum vector plus the minimum vector in a review.
 
@@ -32,7 +32,7 @@ The target variable is the number of useful votes a review receives. Since the m
 
 I find that linear regression performs poorly in predicting usefulness with an overall RMSE of more than 175. Ridge regression that penalizes large coefficients to control for overfitting performs significantly better with an overall RMSE of 0.617 with or without TF-IDF weighting on the average word vectors. Random Forest regressor further lowers the RMSE to 0.613, but the best performer is the XGBoost regressor achieving a RMSE of 0.603. 
 
-### Predicting Review Usefulness with Doc2Vec Features
+### [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb)
 
 A more direct way to use neural network to generate features for predictive modeling is to train a Doc2Vec model, which creates a vector representation for each document, paragraph or review. The reviews have variable lengths, but the trained vectors have a fixed length. The algorithm runs through the entire corpus the first time to build the vocabulary. To produce better results, I then iterate through the corpus 10 more times to learn a vector representation for each word and for each review. 
 
