@@ -18,15 +18,11 @@ Certain words often appear right next to each other as a phrase or meaningful co
 
 Before running the phrase modeling, I segment the reviews into sentences and use the spaCy library to lemmatize the text. After two passes of the phrase modeling, I remove all English stopwords and proper names and create a file of transformed text with one review per line. Now the data have two well-defined layers: documents for reviews and tokens for words and phrases. 
 
-### Train a Word2Vec Model
+### [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
 
 The main idea of word2vec is that we can learn something about the meaning of a word based on the context of the word. The context words that appear immediately before or after a center word can be used to predict what the center word might be. This is the goal of the continuous bag-of-words (CBOW) algorithm, which runs through the entire corpus with a sliding window using the surrounding words to predict the center word in each window. At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the words that share the most similar word vectors as the word ‘dentist’ are ‘pediatric_dentist’ and ‘orthodontist’.
 
-For the healthcare reviews, I first build the vocabulary from going through the entire corpus and then train a word2vec model with 10 epochs. There are a total of 6,382 terms in the word2vec vocabulary. Each term is represented by a 100-deminsiontal vector. 
-
-### [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
-
-With a dictionary mapping each word to a 100-dimensional semantic vector, we can build features for each document. The simplest way is to average word vectors for all word in a review. Another version is to weight each word by the its TF-IDF. Some have also suggested using the maximum vector plus the minimum vector in a review.
+For the healthcare reviews, I first build the vocabulary from going through the entire corpus and then train a word2vec model with 10 epochs. There are a total of 6,382 terms in the word2vec vocabulary. With a dictionary mapping each word to a 100-dimensional semantic vector, we can build features for each document. The simplest way is to average word vectors for all word in a review. Another version is to weight each word by the its TF-IDF. Some have also suggested using the maximum vector plus the minimum vector in a review.
 
 The target variable is the number of useful votes a review receives. Since the majority of reviews have zero useful votes and the distribution is highly skewed to the right, I take the logarithm of the number of useful votes plus one. To measure the predictive performance of a model, I use 5-fold cross-validation to generate an overall Root Mean Squared Error (RMSE) of the transformed target variable. 
 
