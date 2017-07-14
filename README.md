@@ -1,4 +1,4 @@
-# Capstone Project: Analyzing Healthcare Reviews with NLP
+# NLP: Analyzing Healthcare Reviews and Predicting Their Usefulness
 
 It is difficult to find a good doctor who will always take the patient’s best interest as top priority. Although patients are no experts, they do have the first-hand experience of the treatment and know exactly how they feel before and after treatment. One way to judge the quality of a doctor’s diagnosis or treatment is to go directly to listen to what the patients would say. Yelp’s business dataset contains 10,211 different healthcare organizations in 11 cities across 4 countries and 114,556 reviews about them.
 
