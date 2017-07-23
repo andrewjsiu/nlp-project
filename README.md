@@ -1,13 +1,10 @@
-# NLP: Analyzing Healthcare Reviews and Predicting Their Usefulness
-
 ## Table of Contents
 
-1. Motivation
-2. Text Preprocessing
-3. Predicting Review Usefulness with Word2Vec Features
-4. Predicting Review Usefulness with Doc2Vec Features
+1. Text Preprocessing
+2. Predicting Review Usefulness with Word2Vec Features
+3. Predicting Review Usefulness with Doc2Vec Features
 
-### Motivation
+## NLP: Analyzing Healthcare Reviews and Predicting Review Usefulness
 
 How much can we learn from healthcare reviews written by patients? Patients are no experts, but they do have the first-hand experience of a treatment and know exactly how they feel before and after the treatment. To go beyond the individual subjective experience, the community can also vote on the usefulness of a review. 
 
