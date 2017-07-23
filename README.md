@@ -1,4 +1,11 @@
-## NLP: Analyzing Healthcare Reviews and Predicting Their Usefulness
+# NLP: Analyzing Healthcare Reviews and Predicting Their Usefulness
+
+## Table of Contents
+
+1. Motivation
+2. Text Preprocessing
+3. Predicting Review Usefulness with Word2Vec Features
+4. Predicting Review Usefulness with Doc2Vec Features
 
 ### Motivation
 
@@ -6,7 +13,7 @@ How much can we learn from healthcare reviews written by patients? Patients are 
 
 Can we use text alone to predict review usefulness? It often takes time for a good review to gather many votes that it deserves. But if useful reviews tend to use similar words or styles, we should be able to predict how many useful votes a review will eventually obtain as soon as it is written. Such model will help people to quickly find the most useful reviews and hopefully better care.
 
-### [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20Text_Preprocessing.ipynb)
+### Text Preprocessing
 
 [Yelp dataset](https://www.yelp.com/dataset_challenge) contains more than 4 million reviews written by 1 million users for 144 thousand businesses. The data are provided in .json format as separate files for businesses and reviews. The files are text files (UTF-8) with one json object corresponding to an individual record in each line.
 
@@ -18,7 +25,7 @@ Certain words often appear right next to each other as a phrase or meaningful co
 
 Before running the phrase modeling, I segment the reviews into sentences and use the spaCy library to lemmatize the text. After two passes of the phrase modeling, I remove all English stopwords and proper names and create a file of transformed text with one review per line. Now the data have two well-defined layers: documents for reviews and tokens for words and phrases. 
 
-### [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
+### Predicting Review Usefulness with Word2Vec Features
 
 The main idea of word2vec is that we can learn something about the meaning of a word based on the context of the word. The context words that appear immediately before or after a center word can be used to predict what the center word might be. This is the goal of the continuous bag-of-words (CBOW) algorithm, which runs through the entire corpus with a sliding window using the surrounding words to predict the center word in each window. At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the words that share the most similar word vectors as the word ‘dentist’ are ‘pediatric_dentist’ and ‘orthodontist’.
 
@@ -28,7 +35,7 @@ The target variable is the number of useful votes a review receives. Since most 
 
 I find that linear regression performs poorly in predicting usefulness with an overall RMSE of more than 175. Ridge regression that penalizes large coefficients to control for overfitting performs significantly better with an overall RMSE of 0.617 with or without TF-IDF weighting on the average word vectors. Random Forest regressor further lowers the RMSE to 0.613, but the best performer is the XGBoost regressor achieving a RMSE of 0.603. 
 
-### [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb)
+### Predicting Review Usefulness with Doc2Vec Features
 
 A more direct way to use neural network to generate features for predictive modeling is to train a Doc2Vec model, which creates a vector representation for each document, paragraph or review. The reviews have variable lengths, but the trained vectors have a fixed length. The algorithm runs through the entire corpus the first time to build the vocabulary. To produce better results, I then iterate through the corpus 10 more times to learn a vector representation for each word and for each review. 
 
