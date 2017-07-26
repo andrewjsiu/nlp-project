@@ -8,7 +8,9 @@
 
 Yelp has gathered millions of reviews on various organizations, but not all reviews are equally useful. To measure usefulness, Yelp has asked the community to vote on the usefulness of each review. However, it often takes weeks or months for a good review to accumulate the votes it deserves. It would help people to find the most useful reviews more quickly if we can predict how useful a review would be as soon as it is written. 
 
-The goal of this project is to build a predictive model based on the text alone, so there is no need to wait for people to vote and gather additional data.
+The goal of this project is to build a predictive model based on the text alone, so there is no need to wait for people to vote and gather additional data. The target variable is the number of useful votes a review receives. Since most of the reviews have zero useful votes and the distribution is highly skewed to the right, I take the logarithm of the number of useful votes plus one. To measure the predictive performance of a model, I use 5-fold cross-validation to generate an overall Root Mean Squared Error (RMSE) of the transformed target variable. 
+
+![alt text](https://s3.amazonaws.com/myelpdata/useful_votes.png)
 
 ### Text Preprocessing
 
@@ -27,8 +29,6 @@ Before running the phrase modeling, I segment the reviews into sentences and use
 One way to vectorize the text is count the frequency of different words used and rely on the word-word co-occurrence matrix, leveraging the global statistical information. But it tends to perform poorly on word analogy. Another method is based on local context windows, and the main idea is that we can learn something about the meaning of a word based on the context of the word. The context words that appear immediately before or after a center word can be used to predict what the center word might be. This is the goal of the continuous bag-of-words (CBOW) algorithm, which runs through the entire corpus with a sliding window using the surrounding words to predict the center word in each window. At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the words that share the most similar word vectors as the word ‘dentist’ are ‘pediatric_dentist’ and ‘orthodontist’.
 
 For the healthcare reviews, I first build the vocabulary from going through the entire corpus and then train a word2vec model with 10 epochs. There is a total of 6,382 terms in the word2vec vocabulary. With a dictionary mapping each word to a 100-dimensional semantic vector, we can build features for each document. The simplest way is to average word vectors for all word in a review. Another version is to weight each word by the its TF-IDF. Some have also suggested using the maximum vector plus the minimum vector in a review.
-
-The target variable is the number of useful votes a review receives. Since most of the reviews have zero useful votes and the distribution is highly skewed to the right, I take the logarithm of the number of useful votes plus one. To measure the predictive performance of a model, I use 5-fold cross-validation to generate an overall Root Mean Squared Error (RMSE) of the transformed target variable. 
 
 I find that linear regression performs poorly in predicting usefulness with an overall RMSE of more than 175. Ridge regression that penalizes large coefficients to control for overfitting performs significantly better with an overall RMSE of 0.617 with or without TF-IDF weighting on the average word vectors. Random Forest regressor further lowers the RMSE to 0.613, but the best performer is the XGBoost regressor achieving a RMSE of 0.603. 
 
