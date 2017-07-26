@@ -35,7 +35,7 @@ I find that linear regression performs poorly in predicting usefulness with an o
 Since the document features are average word vectors, we could find the predicted usefulness of a document that contains a single word. This would allow us to find which words are most useful or least useful. I first estimate a regression model and then use it to predict the number of useful votes each single word vector will obtain. In ranking all words by their predicted usefulness, both XGBoost and Ridge regressors show that words that involve a dollar amount, 'price', 'co-pay' or 'cash' tend to be the most useful words, perhaps because they are informative and provide objective facts. Words like 'confidence', 'amazing' and 'excellent' are mere subjective feelings, so they are among the least useful of all words.
 
 Model |	Overall RMSE of 5-Fold CV
---- | ---:
+:---: | ---:
 xgb_d2v	|  0.5850
 gbr_d2v	|  0.5853
 rfr_d2v	|  0.5900
