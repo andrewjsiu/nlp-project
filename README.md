@@ -34,6 +34,29 @@ I find that linear regression performs poorly in predicting usefulness with an o
 
 Since the document features are average word vectors, we could find the predicted usefulness of a document that contains a single word. This would allow us to find which words are most useful or least useful. I first estimate a regression model and then use it to predict the number of useful votes each single word vector will obtain. In ranking all words by their predicted usefulness, both XGBoost and Ridge regressors show that words that involve a dollar amount, 'price', 'co-pay' or 'cash' tend to be the most useful words, perhaps because they are informative and provide objective facts. Words like 'confidence', 'amazing' and 'excellent' are mere subjective feelings, so they are among the least useful of all words.
 
+Ridge Regression
+Most Useful	| Least Useful
+---------	| -----------
+parking	| exceptional
+price	| excellent
+few_minute | amazing
+become	| anyone
+co_pay	| great
+than	| expert
+amount	| outstanding
+side	| issue
+cash	| incredible
+pretty	| wonderful
+
+
+
+
+### Predicting Review Usefulness with Doc2Vec Features
+
+A more direct way to use neural network to generate features for predictive modeling is to train a Doc2Vec model, which creates a vector representation for each document, paragraph or review. The reviews have variable lengths, but the trained vectors have a fixed length. The algorithm runs through the entire corpus the first time to build the vocabulary. To produce better results, I then iterate through the corpus 10 more times to learn a vector representation for each word and for each review. 
+
+For every regression model, the predictive performance with Doc2Vec is better than that with features generated from Word2Vec. The linear regression with Doc2Vec achieves an overall RMSE of 0.597 with five folds of cross-validation. The best performer is still XGBoost regressor with a RMSE of 0.585. 
+
 Model | RMSE of 5-Fold CV
 :---: | ---:
 xgb_d2v	|  0.5850
@@ -47,13 +70,6 @@ ridge_w2v_tfidf	|  0.6175
 ridge_w2v	|  0.6176
 lr_w2v_tfidf |175.3874
 lr_w2v |324.2977
-
-
-### Predicting Review Usefulness with Doc2Vec Features
-
-A more direct way to use neural network to generate features for predictive modeling is to train a Doc2Vec model, which creates a vector representation for each document, paragraph or review. The reviews have variable lengths, but the trained vectors have a fixed length. The algorithm runs through the entire corpus the first time to build the vocabulary. To produce better results, I then iterate through the corpus 10 more times to learn a vector representation for each word and for each review. 
-
-For every regression model, the predictive performance with Doc2Vec is better than that with features generated from Word2Vec. The linear regression with Doc2Vec achieves an overall RMSE of 0.597 with five folds of cross-validation. The best performer is still XGBoost regressor with a RMSE of 0.585. 
 
 In practice, we may only have a small dataset, so I also check how predictive performance varies with the amount of training data. Unsurprisingly, RMSE falls as we use more training data from 30% to 70% of the entire corpus, but the decrease in error is less than 0.003 for all models. Thus, even if we only use 30% of the data, we can still achieve reasonably good out-of-sample prediction. 
 
