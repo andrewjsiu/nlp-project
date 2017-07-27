@@ -4,7 +4,7 @@
 2. [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
 3. [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb)
 
-## NLP: Analyzing Healthcare Reviews and Predicting Review Usefulness
+## Analyzing Healthcare Reviews and Predicting Review Usefulness
 
 Yelp has gathered millions of reviews on various organizations, but not all reviews are equally useful. To measure usefulness, Yelp has asked the community to vote on the usefulness of each review. However, it often takes weeks or months for a good review to accumulate the votes it deserves. It would help people to find the most useful reviews more quickly if we can predict how useful a review would be as soon as it is written. 
 
