@@ -1,3 +1,5 @@
+# NLP Project: Predicting Review Usefulness
+
 ## Table of Contents
 
 1. [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20Text_Preprocessing.ipynb)
