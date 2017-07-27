@@ -1,8 +1,8 @@
 ## Table of Contents
 
-1. [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/README.md#text-preprocessing)
-2. [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/README.md#predicting-review-usefulness-with-word2vec-features)
-3. [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/README.md#predicting-review-usefulness-with-doc2vec-features)
+1. [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20text-preprocessing.ipynb)
+2. [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
+3. [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb)
 
 ## NLP: Analyzing Healthcare Reviews and Predicting Review Usefulness
 
