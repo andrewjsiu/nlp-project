@@ -1,6 +1,6 @@
 ## Table of Contents
 
-1. [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20text_preprocessing.ipynb)
+1. [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20Text_Preprocessing.ipynb)
 2. [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
 3. [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb)
 
