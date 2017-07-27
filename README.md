@@ -1,6 +1,6 @@
 # NLP Project: Predicting Review Usefulness
 
-## Motivation
+### Motivation
 
 Yelp has gathered millions of reviews on various organizations, but not all reviews are equally useful. To measure usefulness, Yelp has asked the community to vote on the usefulness of each review. However, it often takes weeks or months for a good review to accumulate the votes it deserves. It would help people to find the most useful reviews more quickly if we can predict how useful a review would be as soon as it is written. 
 
@@ -15,7 +15,7 @@ The goal of this project is to build a predictive model based on the text alone,
 2. [Predicting Review Usefulness with Word2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/02%20Word2Vec.ipynb)
 3. [Predicting Review Usefulness with Doc2Vec Features](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb)
 
-### Text Preprocessing
+## Text Preprocessing
 
 [Yelp dataset](https://www.yelp.com/dataset_challenge) contains more than 4 million reviews written by 1 million users for 144 thousand businesses. The data are provided in .json format as separate files for businesses and reviews. The files are text files (UTF-8) with one json object corresponding to an individual record in each line.
 
@@ -27,7 +27,7 @@ Certain words often appear right next to each other as a phrase or meaningful co
 
 Before running the phrase modeling, I segment the reviews into sentences and use the spaCy library to lemmatize the text. After two passes of the phrase modeling, I remove all English stopwords and proper names and create a file of transformed text with one review per line. Now the data have two well-defined layers: documents for reviews and tokens for words and phrases. See my text-processing code [here](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20Text_Preprocessing.ipynb).
 
-### Predicting Review Usefulness with Word2Vec Features
+## Predicting Review Usefulness with Word2Vec Features
 
 One way to vectorize the text is count the frequency of different words used and rely on the word-word co-occurrence matrix, leveraging the global statistical information. But it tends to perform poorly on word analogy. Another method is based on local context windows, and the main idea is that we can learn something about the meaning of a word based on the context of the word. The context words that appear immediately before or after a center word can be used to predict what the center word might be. This is the goal of the continuous bag-of-words (CBOW) algorithm, which runs through the entire corpus with a sliding window using the surrounding words to predict the center word in each window. At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the words that share the most similar word vectors as the word ‘dentist’ are ‘pediatric_dentist’ and ‘orthodontist’.
 
@@ -50,7 +50,7 @@ side	| issue
 cash	| incredible
 pretty	| wonderful
 
-### Predicting Review Usefulness with Doc2Vec Features
+## Predicting Review Usefulness with Doc2Vec Features
 
 A more direct way to use neural network to generate features for predictive modeling is to train a Doc2Vec model, which creates a vector representation for each document, paragraph or review. The reviews have variable lengths, but the trained vectors have a fixed length. The algorithm runs through the entire corpus the first time to build the vocabulary. To produce better results, I then iterate through the corpus 10 more times to learn a vector representation for each word and for each review. 
 
@@ -76,7 +76,7 @@ To further improve the predictive performance, we can tune the several parameter
 
 ![alt text](https://s3.amazonaws.com/myelpdata/feature_imp.png)
 
-### Conclusion
+## Conclusion
 
 The goal of the project is to provide a model that can predict the usefulness of a review as soon as it is written. Then we can always show people the most useful reviews without having to wait for the community to vote on review usefulness. In this project, I have processed the text of Yelp reviews by lemmatizing the words, finding common phrases, removing English stopwords. I then trained the word2vec model to learn word embeddings by making predictions based on local context windows and the doc2vec model that assigns a vector for each document. The results show that the feature vectors obtained from the doc2vec model combined with the XGBoost estimator generated the highest predictive performance. 
 
