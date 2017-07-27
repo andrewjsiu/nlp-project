@@ -1,6 +1,6 @@
 # NLP Project: Predicting Review Usefulness
 
-### Motivation
+## Motivation
 
 Yelp has gathered millions of reviews on various organizations, but not all reviews are equally useful. To measure usefulness, Yelp has asked the community to vote on the usefulness of each review. However, it often takes weeks or months for a good review to accumulate the votes it deserves. It would help people to find the most useful reviews more quickly if we can predict how useful a review would be as soon as it is written. 
 
