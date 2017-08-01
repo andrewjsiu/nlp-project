@@ -31,11 +31,11 @@ Before running the phrase modeling, I segment the reviews into sentences and use
 
 One way to vectorize the text is count the frequency of different words used and rely on the word-word co-occurrence matrix, leveraging the global statistical information. But it tends to perform poorly on word analogy, such as finding semantic or syntactic relationships that exist in pairs of words. Another method is based on local context windows, and the main idea is that the meaning of a word can be learned from its context. Consider the following sentence:
 
-<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="100">
+<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="120">
 
-The context words that appear immediately before or after a center word can be used to predict what the center word might be.
+Image a sliding window that runs through the entire corpus with a fixed window size of seven words. The center word is surrounded by 3 context words before and after it. These context words from the input layer as a bag of words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size with one of the elements set to one and the rest are zeros. The continuous bag-of-words (CBOW) algorithm maximizes the conditional probability of observing the center word given the input context words in each sliding window. 
 
-This is the goal of the continuous bag-of-words (CBOW) algorithm, which runs through the entire corpus with a sliding window using the surrounding words to predict the center word in each window. At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the word vector for 'dentist' is most similar to word vectors for ‘pediatric_dentist’ and ‘orthodontist’.
+At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the word vector for 'dentist' is most similar to word vectors for ‘pediatric_dentist’ and ‘orthodontist’.
 
 To generate features for predictive modeling, one simple way is to average all vectors for words that appear in a review. For the healthcare reviews, there is a total of 6,382 terms in the word2vec vocabulary, with a dictionary mapping each word to a 100-dimensional semantic vector. Averaging all word vectors would yield 100 features for each review. Another version is to weight each word by the its term frequency and inverse document frequency (TF-IDF). Some have also suggested using the maximum vector plus the minimum vector in a review.
 
