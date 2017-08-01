@@ -31,7 +31,7 @@ Before running the phrase modeling, I segment the reviews into sentences and use
 
 One way to vectorize the text is count the frequency of different words used and rely on the word-word co-occurrence matrix, leveraging the global statistical information. But it tends to perform poorly on word analogy, such as finding semantic or syntactic relationships that exist in pairs of words. Another method is based on local context windows, and the main idea is that the meaning of a word can be learned from its context. Consider the following sentence:
 
-<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="96">
+<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="100">
 
 The context words that appear immediately before or after a center word can be used to predict what the center word might be.
 
