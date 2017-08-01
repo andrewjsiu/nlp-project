@@ -33,7 +33,7 @@ One way to vectorize the text is count the frequency of different words used and
 
 <img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="120">
 
-Image a sliding window that runs through the entire corpus with a fixed window size of seven words. The center word is surrounded by 3 context words before and after it. These context words from the input layer as a bag of words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size with one of the elements set to one and the rest are zeros. The continuous bag-of-words (CBOW) algorithm maximizes the conditional probability of observing the center word given the input context words in each sliding window. 
+Image a sliding window that runs through the entire corpus with a fixed window size of 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words from the input layer as a bag of words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size with one of the elements set to one and the rest are zeros. The continuous bag-of-words (CBOW) algorithm maximizes the conditional probability of observing the center word given the input context words in each sliding window. 
 
 At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the word vector for 'dentist' is most similar to word vectors for ‘pediatric_dentist’ and ‘orthodontist’.
 
