@@ -82,7 +82,7 @@ In practice, we may only have a small dataset, so I also check how predictive pe
 
 To further improve the predictive performance, we can tune the several parameters of XGBoost regressor, such as the maximum depth of a tree which determines the complexity of the tree, subsample ratio of the training instance for growing trees, and the degree of regularization on weights. In the end, using the best values for these parameters found by a grid search cross validation the RMSE on the test set falls to 0.5821. See my code on predictive modeling with doc2vec [here](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb).
 
-<img scr="https://s3.amazonaws.com/myelpdata/feature_imp.png" height="500">
+<img scr="https://s3.amazonaws.com/myelpdata/feature_imp.png">
 
 ## Conclusion
 
