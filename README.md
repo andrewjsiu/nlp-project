@@ -4,7 +4,7 @@
 
 Yelp has gathered millions of reviews on various organizations, but not all reviews are equally useful. To measure usefulness, Yelp has asked the community to vote on the usefulness of each review. However, it often takes weeks or months for a good review to accumulate the votes it deserves. It would save much time spent searching if we can predict how useful a review would be as soon as it is written. 
 
-The goal of this project is to build a predictive model based on the text alone, so there is no need to wait for people to vote and gather additional data. The target variable is the number of useful votes a review receives. Since most of the reviews have zero useful votes and the distribution is highly skewed to the right, I take the log transformation to draw the outliers closer to the mean. To measure the predictive performance of a model, I use 5-fold cross-validation to generate an overall Root Mean Squared Error (RMSE) of the transformed target variable. 
+The goal of this project is to build a predictive model based on the text alone, so there is no need to wait for people to vote and gather additional data. The target variable is the number of useful votes a review receives. Since most of the reviews have zero useful votes and the distribution is highly skewed to the right, I take the natural logarithm of the target variable so that the models are not biased towards reviews with lots of votes. To measure the predictive performance of a model, I use 5-fold cross-validation to generate an overall Root Mean Squared Error (RMSE) of the transformed target variable. 
 
 ![alt text](https://s3.amazonaws.com/myelpdata/useful_votes.png)
 
