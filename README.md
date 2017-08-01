@@ -45,7 +45,7 @@ I find that linear regression performs poorly in predicting usefulness with an o
 
 We can also play with the model to find which words are most useful or least useful. Since the document features are average word vectors, the predicted usefulness of a single word is that of a document that contains that one word vector. After estimating a regression model, it can be used to predict the number of useful votes that a hypothetical review that contains a single word vector will obtain. In ranking all words by their predicted usefulness, both XGBoost and Ridge regressors show that words that involve a dollar amount, 'price', 'co-pay' or 'cash' tend to be the most useful words, perhaps because they are informative and provide objective facts. Words like 'confidence', 'amazing' and 'excellent' are mere subjective feelings, so they are among the least useful of all words. Below is a table that shows the results for Ridge regression. 
 
-   |Ten Most Useful	Words | Ten Least Useful Words
+No. |Ten Most Useful	Words | Ten Least Useful Words
 ---|---------	| -----------
 1 | parking	| exceptional
 2 | price	| excellent
@@ -64,7 +64,7 @@ Another approach is to use the methods for learning word vectors to also learn d
 
 For every regression model, the predictive performance with Doc2Vec is better than that with features generated from Word2Vec. The linear regression with Doc2Vec achieves an overall RMSE of 0.597 with five folds of cross-validation. The best performer is still XGBoost regressor with a RMSE of 0.585. 
 
-|Model | RMSE of 5-Fold CV | Description
+No. |Model | RMSE of 5-Fold CV | Description
 ---|:---: | ---: | :---
 1 | xgb_d2v	|  0.5850 | XGBoost Regressor with Doc2Vec features
 2 | gbr_d2v	|  0.5853 | Gradient Boosting Regressor with Doc2Vec features
