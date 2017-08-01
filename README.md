@@ -45,18 +45,18 @@ I find that linear regression performs poorly in predicting usefulness with an o
 
 We can also play with the model to find which words are most useful or least useful. Since the document features are average word vectors, the predicted usefulness of a single word is that of a document that contains that one word vector. After estimating a regression model, it can be used to predict the number of useful votes that a hypothetical review that contains a single word vector will obtain. In ranking all words by their predicted usefulness, both XGBoost and Ridge regressors show that words that involve a dollar amount, 'price', 'co-pay' or 'cash' tend to be the most useful words, perhaps because they are informative and provide objective facts. Words like 'confidence', 'amazing' and 'excellent' are mere subjective feelings, so they are among the least useful of all words. Below is a table that shows the results for Ridge regression. 
 
-Top Ten Most Useful	Words | Ten Least Useful Words
----------	| -----------
-parking	| exceptional
-price	| excellent
-few_minute | amazing
-become	| anyone
-co_pay	| great
-than	| expert
-amount	| outstanding
-side	| issue
-cash	| incredible
-pretty	| wonderful
+   |Ten Most Useful	Words | Ten Least Useful Words
+---|---------	| -----------
+1 | parking	| exceptional
+2 | price	| excellent
+3 | few_minute | amazing
+4 | become	| anyone
+5 | co_pay	| great
+6 | than	| expert
+7 | amount	| outstanding
+8 | side	| issue
+9 | cash	| incredible
+10 | pretty	| wonderful
 
 ## Predicting Review Usefulness with Doc2Vec Features
 
@@ -64,19 +64,19 @@ Another approach is to use the methods for learning word vectors to also learn d
 
 For every regression model, the predictive performance with Doc2Vec is better than that with features generated from Word2Vec. The linear regression with Doc2Vec achieves an overall RMSE of 0.597 with five folds of cross-validation. The best performer is still XGBoost regressor with a RMSE of 0.585. 
 
-Model | RMSE of 5-Fold CV | Description
-:---: | ---: | :---
-xgb_d2v	|  0.5850 | XGBoost Regressor with Doc2Vec 
-gbr_d2v	|  0.5853 | Gradient Boosting Regressor with Doc2Vec 
-rfr_d2v	|  0.5900 | Random Forest Regressor with Doc2Vec 
-ridge_d2v	|  0.5974 | Ridge Regression with Doc2Vec 
-lr_d2v	|  0.5974 | Linear Regression with Doc2Vec
-xgb_w2v	|  0.6037 | XGBoost Regressor with average word vectors
-rfr_w2v	|  0.6130 | Random Forest Regressor with average word vectors
-ridge_w2v_tfidf	|  0.6175 | Ridge Regression with average word vectors weighted by TF-IDF
-ridge_w2v	|  0.6176 | Ridge Regression with average word vectors 
-lr_w2v_tfidf |175.3874 | Linear Regression with average word vectors weighted by TF-IDF
-lr_w2v |324.2977 | Linear Regression with average word vectors 
+|Model | RMSE of 5-Fold CV | Description
+---|:---: | ---: | :---
+1 | xgb_d2v	|  0.5850 | XGBoost Regressor with Doc2Vec features
+2 | gbr_d2v	|  0.5853 | Gradient Boosting Regressor with Doc2Vec features
+3 | rfr_d2v	|  0.5900 | Random Forest Regressor with Doc2Vec features
+4 | ridge_d2v	|  0.5974 | Ridge Regression with Doc2Vec features
+5 | lr_d2v	|  0.5974 | Linear Regression with Doc2Vec features
+6 | xgb_w2v	|  0.6037 | XGBoost Regressor with average word vectors
+7 | rfr_w2v	|  0.6130 | Random Forest Regressor with average word vectors
+8 | ridge_w2v_tfidf	|  0.6175 | Ridge Regression with average word vectors weighted by TF-IDF
+9 | ridge_w2v	|  0.6176 | Ridge Regression with average word vectors 
+10 | lr_w2v_tfidf |175.3874 | Linear Regression with average word vectors weighted by TF-IDF
+11 | lr_w2v |324.2977 | Linear Regression with average word vectors 
 
 In practice, we may only have a small dataset, so I also check how predictive performance varies with the amount of training data. Unsurprisingly, RMSE falls as we use more training data from 30% to 70% of the entire corpus, but the decrease in error is less than 0.003 for all models. Thus, even if we only use 30% of the data, we can still achieve reasonably good out-of-sample prediction. 
 
