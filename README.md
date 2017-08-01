@@ -35,7 +35,7 @@ One way to vectorize the text is count the frequency of different words used and
 
 Image a sliding window that runs through the entire corpus with a fixed window size of 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words from the input layer as a bag of words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size (V) with one of the elements set to one and the rest are zeros. The continuous bag-of-words (CBOW) algorithm maximizes the conditional probability of observing the center word given the input context words in each sliding window. 
 
-<img src="https://s3.amazonaws.com/myelpdata/cbow.png">
+<img src="https://s3.amazonaws.com/myelpdata/cbow.png" height="500">
 
 At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the word vector for 'dentist' is most similar to word vectors for ‘pediatric_dentist’ and ‘orthodontist’.
 
@@ -45,7 +45,7 @@ I find that linear regression performs poorly in predicting usefulness with an o
 
 We can also play with the model to find which words are most useful or least useful. Since the document features are average word vectors, the predicted usefulness of a single word is that of a document that contains that one word vector. After estimating a regression model, it can be used to predict the number of useful votes that a hypothetical review that contains a single word vector will obtain. In ranking all words by their predicted usefulness, both XGBoost and Ridge regressors show that words that involve a dollar amount, 'price', 'co-pay' or 'cash' tend to be the most useful words, perhaps because they are informative and provide objective facts. Words like 'confidence', 'amazing' and 'excellent' are mere subjective feelings, so they are among the least useful of all words. Below is a table that shows the results for Ridge regression. 
 
-Most Useful	Words | Least Useful Words
+Top Ten Most Useful	Words | Ten Least Useful Words
 ---------	| -----------
 parking	| exceptional
 price	| excellent
@@ -82,7 +82,7 @@ In practice, we may only have a small dataset, so I also check how predictive pe
 
 To further improve the predictive performance, we can tune the several parameters of XGBoost regressor, such as the maximum depth of a tree which determines the complexity of the tree, subsample ratio of the training instance for growing trees, and the degree of regularization on weights. In the end, using the best values for these parameters found by a grid search cross validation the RMSE on the test set falls to 0.5821. See my code on predictive modeling with doc2vec [here](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb).
 
-![alt text](https://s3.amazonaws.com/myelpdata/feature_imp.png)
+<img scr="https://s3.amazonaws.com/myelpdata/feature_imp.png" height="500">
 
 ## Conclusion
 
