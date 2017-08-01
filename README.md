@@ -31,9 +31,11 @@ Before running the phrase modeling, I segment the reviews into sentences and use
 
 One way to vectorize the text is count the frequency of different words used and rely on the word-word co-occurrence matrix, leveraging the global statistical information. But it tends to perform poorly on word analogy, such as finding semantic or syntactic relationships that exist in pairs of words. Another method is based on local context windows, and the main idea is that the meaning of a word can be learned from its context. Consider the following sentence:
 
-<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="120">
+<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="110">
 
-Image a sliding window that runs through the entire corpus with a fixed window size of 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words from the input layer as a bag of words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size with one of the elements set to one and the rest are zeros. The continuous bag-of-words (CBOW) algorithm maximizes the conditional probability of observing the center word given the input context words in each sliding window. 
+Image a sliding window that runs through the entire corpus with a fixed window size of 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words from the input layer as a bag of words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size (V) with one of the elements set to one and the rest are zeros. The continuous bag-of-words (CBOW) algorithm maximizes the conditional probability of observing the center word given the input context words in each sliding window. 
+
+<img src="https://s3.amazonaws.com/myelpdata/cbow.png">
 
 At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the word vector for 'dentist' is most similar to word vectors for ‘pediatric_dentist’ and ‘orthodontist’.
 
@@ -62,19 +64,19 @@ Another approach is to use the methods for learning word vectors to also learn d
 
 For every regression model, the predictive performance with Doc2Vec is better than that with features generated from Word2Vec. The linear regression with Doc2Vec achieves an overall RMSE of 0.597 with five folds of cross-validation. The best performer is still XGBoost regressor with a RMSE of 0.585. 
 
-Model | RMSE of 5-Fold CV
-:---: | ---:
-xgb_d2v	|  0.5850
-gbr_d2v	|  0.5853
-rfr_d2v	|  0.5900
-ridge_d2v	|  0.5974
-lr_d2v	|  0.5974
-xgb_w2v	|  0.6037
-rfr_w2v	|  0.6130
-ridge_w2v_tfidf	|  0.6175
-ridge_w2v	|  0.6176
-lr_w2v_tfidf |175.3874
-lr_w2v |324.2977
+Model | RMSE of 5-Fold CV | Description
+:---: | ---: | :---
+xgb_d2v	|  0.5850 | XGBoost Regressor with Doc2Vec 
+gbr_d2v	|  0.5853 | Gradient Boosting Regressor with Doc2Vec 
+rfr_d2v	|  0.5900 | Random Forest Regressor with Doc2Vec 
+ridge_d2v	|  0.5974 | Ridge Regression with Doc2Vec 
+lr_d2v	|  0.5974 | Linear Regression with Doc2Vec
+xgb_w2v	|  0.6037 | XGBoost Regressor with average word vectors
+rfr_w2v	|  0.6130 | Random Forest Regressor with average word vectors
+ridge_w2v_tfidf	|  0.6175 | Ridge Regression with average word vectors weighted by TF-IDF
+ridge_w2v	|  0.6176 | Ridge Regression with average word vectors 
+lr_w2v_tfidf |175.3874 | Linear Regression with average word vectors weighted by TF-IDF
+lr_w2v |324.2977 | Linear Regression with average word vectors 
 
 In practice, we may only have a small dataset, so I also check how predictive performance varies with the amount of training data. Unsurprisingly, RMSE falls as we use more training data from 30% to 70% of the entire corpus, but the decrease in error is less than 0.003 for all models. Thus, even if we only use 30% of the data, we can still achieve reasonably good out-of-sample prediction. 
 
