@@ -1,4 +1,4 @@
-# NLP Project: Predicting Review Usefulness
+# Predicting Review Usefulness with NLP
 
 ## Motivation
 
