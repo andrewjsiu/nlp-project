@@ -6,9 +6,6 @@ Yelp has gathered millions of reviews on various organizations, but not all revi
 
 The goal of this project is to build a predictive model based on the text alone, so there is no need to wait for people to vote and gather additional data. The target variable is the number of useful votes a review receives. Since most of the reviews have zero useful votes and the distribution is highly skewed to the right, I take the natural logarithm of the target variable so that the models are not biased towards reviews with lots of votes. To measure the predictive performance of a model, I use 5-fold cross-validation to generate an overall Root Mean Squared Error (RMSE) of the transformed target variable. 
 
-![alt text](https://s3.amazonaws.com/myelpdata/useful_votes.png)
-
-
 ## Table of Contents
 
 1. [Text Preprocessing](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/01%20Text_Preprocessing.ipynb)
