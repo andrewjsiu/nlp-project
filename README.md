@@ -30,7 +30,7 @@ One way to vectorize the text is count the frequency of different words used and
 
 <img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="110">
 
-Image a sliding window that runs through the entire corpus with a fixed window size, say 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words form the input layer as a bag of words, not considering the order of these words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size (V) with only one element set to one and the rest are zeros. This window slides through the corpus so it's called the continuous bag-of-words (CBOW) algorithm, which maximizes the conditional probability of actually observing the center word given the input context words in each sliding window. The skip-gram algorithm is the opposite, as it seeks to predict the context words given the center word.
+Imagine a sliding window that runs through the entire corpus with a fixed window size, say 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words form the input layer as a bag of words, not considering the order of these words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size (V) with only one element set to one and the rest are zeros. This window slides through the corpus so it's called the continuous bag-of-words (CBOW) algorithm, which maximizes the conditional probability of actually observing the center word given the input context words in each sliding window. The skip-gram algorithm is the opposite, as it seeks to predict the context words given the center word.
 
 <img src="https://s3.amazonaws.com/myelpdata/cbow.png" height="600">
 
