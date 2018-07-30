@@ -28,11 +28,11 @@ Before running the phrase modeling, I segment the reviews into sentences and use
 
 One way to vectorize the text is count the frequency of different words used and rely on the word-word co-occurrence matrix, leveraging the global statistical information. But it tends to perform poorly on word analogy, such as finding semantic or syntactic relationships that exist in pairs of words. Another method is based on local context windows, and the main idea is that the meaning of a word can be learned from its context. Consider the following sentence:
 
-<img src="https://s3.amazonaws.com/myelpdata/sentence.png" height="110">
+<img src="https://github.com/andrewjsiu/nlp-project/blob/master/images/sentence.png" height="110">
 
 Imagine a sliding window that runs through the entire corpus with a fixed window size, say 7 words. The center word is surrounded by 3 context words before and 3 after it. These context words form the input layer as a bag of words, not considering the order of these words. Each word is encoded as a one-hot vector, so the dimension is the vocabulary size (V) with only one element set to one and the rest are zeros. This window slides through the corpus so it's called the continuous bag-of-words (CBOW) algorithm, which maximizes the conditional probability of actually observing the center word given the input context words in each sliding window. The skip-gram algorithm is the opposite, as it seeks to predict the context words given the center word.
 
-<img src="https://s3.amazonaws.com/myelpdata/cbow.png" height="600">
+<img src="https://github.com/andrewjsiu/nlp-project/blob/master/images/cbow.png" height="600">
 
 At the core of the word2vec model is to train a neural network that produces a vector representation for each word in the corpus. Words that share common contexts will have similar word vectors.  For instance, the word vector for 'dentist' is most similar to word vectors for ‘pediatric_dentist’ and ‘orthodontist’.
 
@@ -79,7 +79,7 @@ In practice, we may only have a small dataset, so I also check how predictive pe
 
 To further improve the predictive performance, we can tune the several parameters of XGBoost regressor, such as the maximum depth of a tree which determines the complexity of the tree, subsample ratio of the training instance for growing trees, and the degree of regularization on weights. In the end, using the best values for these parameters found by a grid search cross validation the RMSE on the test set falls to 0.5821. See my code on predictive modeling with doc2vec [here](https://github.com/andrewjsiu/Capstone_Project_NLP/blob/master/03%20Doc2Vec.ipynb).
 
-<img src="https://s3.amazonaws.com/myelpdata/feature_imp.png" height="600">
+<img src="https://github.com/andrewjsiu/nlp-project/blob/master/images/feature_imp.png" height="600">
 
 ## Conclusion
 
